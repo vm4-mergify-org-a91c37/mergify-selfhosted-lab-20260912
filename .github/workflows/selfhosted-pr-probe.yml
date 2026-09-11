@@ -1,0 +1,14 @@
+name: Trusted Self Hosted Pull Request Probe
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: [self-hosted, vm4-mergify-security]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run repository PR probe
+        run: bash ci/pr-probe.sh
